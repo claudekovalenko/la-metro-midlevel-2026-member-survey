@@ -340,6 +340,11 @@
       </div>
     </div>
 
+    <div class="field">
+      <label for="location">Where does your church or gathering meet?</label>
+      <input type="text" id="location" placeholder="e.g. a home in Long Beach, a rented space in Santa Ana">
+    </div>
+
     <div class="section-label">Wins &amp; challenges</div>
 
     <div class="field">
@@ -478,6 +483,7 @@ form.addEventListener('submit', async (e)=>{
     email: document.getElementById('email').value.trim(),
     phone: document.getElementById('phone').value.trim(),
     church: document.getElementById('church').value.trim(),
+    location: document.getElementById('location').value.trim(),
     wins: document.getElementById('wins').value.trim(),
     challenges: document.getElementById('challenges').value.trim(),
     doingWellElements: wellElements,
@@ -533,7 +539,7 @@ adminToggle.addEventListener('click', async ()=>{
             const d = JSON.parse(res.value);
             const card = document.createElement('div');
             card.className = 'app-card';
-            card.innerHTML = `<b>${d.name}</b><br>${d.church}<br>${d.email}${d.phone ? ' · '+d.phone : ''}`
+            card.innerHTML = `<b>${d.name}</b><br>${d.church}${d.location ? ' · '+d.location : ''}<br>${d.email}${d.phone ? ' · '+d.phone : ''}`
               + `${d.wins ? '<br>Wins: '+d.wins : ''}${d.challenges ? '<br>Challenges: '+d.challenges : ''}`
               + `${(d.doingWellElements && d.doingWellElements.length) ? '<br>Doing well (checked): '+d.doingWellElements.join(', ') : ''}${d.doingWell ? '<br>Doing well: '+d.doingWell : ''}`
               + `${(d.couldGrowElements && d.couldGrowElements.length) ? '<br>Could grow (checked): '+d.couldGrowElements.join(', ') : ''}${d.couldGrow ? '<br>Could grow: '+d.couldGrow : ''}`
