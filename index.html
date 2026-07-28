@@ -120,6 +120,35 @@
     grid-template-columns: 1fr 1fr;
     gap: 18px;
   }
+
+  .checklist{
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px 18px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 18px 20px;
+    background: rgba(246,241,228,0.03);
+  }
+  @media (max-width: 540px){ .checklist{ grid-template-columns: 1fr; } }
+  .check-item{
+    display:flex;
+    align-items:flex-start;
+    gap: 10px;
+    font-size: 14px;
+  }
+  .check-item input[type=checkbox]{
+    margin-top: 3px;
+    width: 17px;
+    height: 17px;
+    accent-color: var(--gold);
+    flex-shrink:0;
+  }
+  .check-item label{
+    margin:0;
+    font-weight: 500;
+    font-size: 14px;
+  }
   @media (max-width: 540px){ .row2{ grid-template-columns: 1fr; } }
 
   .thirds{ margin: 44px 0 40px; }
@@ -283,7 +312,7 @@
 
   <div class="eyebrow">NPL Midlevel Survey · Church Member Check-In</div>
   <h1>How's your <em>time in the church</em> been?</h1>
-  <p class="lede">A short check-in for church members — not leaders. This helps us hear directly from the congregation about wins, challenges, and where the church circle could grow.</p>
+  <p class="lede">A short check-in for church members. This helps us hear directly from the congregation about wins, challenges, and where the church or gathering could grow.</p>
 
   <form id="appForm">
 
@@ -306,9 +335,14 @@
         <input type="tel" id="phone" placeholder="(323) 555-0148">
       </div>
       <div class="field">
-        <label for="church">Church / circle name</label>
-        <input type="text" id="church" placeholder="Name of your church or circle" required>
+        <label for="church">Church / gathering name</label>
+        <input type="text" id="church" placeholder="Name of your church or gathering" required>
       </div>
+    </div>
+
+    <div class="field">
+      <label for="location">Where does your church or gathering meet?</label>
+      <input type="text" id="location" placeholder="e.g. a home in Long Beach, a rented space in Santa Ana">
     </div>
 
     <div class="section-label">Wins &amp; challenges</div>
@@ -327,12 +361,48 @@
     <div class="section-label">The church circle</div>
 
     <div class="field">
-      <label for="doingWell">What's being done well</label>
+      <label>What's being done well (check all that apply)</label>
+      <div class="checklist">
+        <div class="check-item"><input type="checkbox" id="well-lordship" value="Lordship of Christ"><label for="well-lordship">Lordship of Christ</label></div>
+        <div class="check-item"><input type="checkbox" id="well-repentance" value="Repentance &amp; faith"><label for="well-repentance">Repentance &amp; faith</label></div>
+        <div class="check-item"><input type="checkbox" id="well-baptism" value="Baptism"><label for="well-baptism">Baptism</label></div>
+        <div class="check-item"><input type="checkbox" id="well-spirit" value="Spirit Led"><label for="well-spirit">Spirit Led</label></div>
+        <div class="check-item"><input type="checkbox" id="well-word" value="Word of God"><label for="well-word">Word of God</label></div>
+        <div class="check-item"><input type="checkbox" id="well-love" value="Love"><label for="well-love">Love</label></div>
+        <div class="check-item"><input type="checkbox" id="well-communion" value="Communion"><label for="well-communion">Communion</label></div>
+        <div class="check-item"><input type="checkbox" id="well-prayer" value="Prayer"><label for="well-prayer">Prayer</label></div>
+        <div class="check-item"><input type="checkbox" id="well-obedience" value="Obedience"><label for="well-obedience">Obedience</label></div>
+        <div class="check-item"><input type="checkbox" id="well-fellowship" value="Fellowship"><label for="well-fellowship">Fellowship</label></div>
+        <div class="check-item"><input type="checkbox" id="well-worship" value="Worship"><label for="well-worship">Worship</label></div>
+        <div class="check-item"><input type="checkbox" id="well-multiplication" value="Multiplication"><label for="well-multiplication">Multiplication</label></div>
+      </div>
+    </div>
+
+    <div class="field">
+      <label for="doingWell">Say more about what's being done well</label>
       <textarea id="doingWell" placeholder="What do you see the church circle doing well right now?"></textarea>
     </div>
 
     <div class="field">
-      <label for="couldGrow">What's not being done well, and where it could grow</label>
+      <label>Where the church or gathering could grow (check all that apply)</label>
+      <div class="checklist">
+        <div class="check-item"><input type="checkbox" id="grow-lordship" value="Lordship of Christ"><label for="grow-lordship">Lordship of Christ</label></div>
+        <div class="check-item"><input type="checkbox" id="grow-repentance" value="Repentance &amp; faith"><label for="grow-repentance">Repentance &amp; faith</label></div>
+        <div class="check-item"><input type="checkbox" id="grow-baptism" value="Baptism"><label for="grow-baptism">Baptism</label></div>
+        <div class="check-item"><input type="checkbox" id="grow-spirit" value="Spirit Led"><label for="grow-spirit">Spirit Led</label></div>
+        <div class="check-item"><input type="checkbox" id="grow-word" value="Word of God"><label for="grow-word">Word of God</label></div>
+        <div class="check-item"><input type="checkbox" id="grow-love" value="Love"><label for="grow-love">Love</label></div>
+        <div class="check-item"><input type="checkbox" id="grow-communion" value="Communion"><label for="grow-communion">Communion</label></div>
+        <div class="check-item"><input type="checkbox" id="grow-prayer" value="Prayer"><label for="grow-prayer">Prayer</label></div>
+        <div class="check-item"><input type="checkbox" id="grow-obedience" value="Obedience"><label for="grow-obedience">Obedience</label></div>
+        <div class="check-item"><input type="checkbox" id="grow-fellowship" value="Fellowship"><label for="grow-fellowship">Fellowship</label></div>
+        <div class="check-item"><input type="checkbox" id="grow-worship" value="Worship"><label for="grow-worship">Worship</label></div>
+        <div class="check-item"><input type="checkbox" id="grow-multiplication" value="Multiplication"><label for="grow-multiplication">Multiplication</label></div>
+      </div>
+    </div>
+
+    <div class="field">
+      <label for="couldGrow">Say more about where the church or gathering could grow</label>
       <textarea id="couldGrow" placeholder="Where do you see room to grow or improve?"></textarea>
     </div>
 
@@ -405,14 +475,22 @@ form.addEventListener('submit', async (e)=>{
   statusMsg.textContent = '';
   statusMsg.className = 'status';
 
+  const wellElements = [];
+  document.querySelectorAll('input[id^="well-"]:checked').forEach(cb => wellElements.push(cb.value));
+  const growElements = [];
+  document.querySelectorAll('input[id^="grow-"]:checked').forEach(cb => growElements.push(cb.value));
+
   const entry = {
     name: document.getElementById('fullName').value.trim(),
     email: document.getElementById('email').value.trim(),
     phone: document.getElementById('phone').value.trim(),
     church: document.getElementById('church').value.trim(),
+    location: document.getElementById('location').value.trim(),
     wins: document.getElementById('wins').value.trim(),
     challenges: document.getElementById('challenges').value.trim(),
+    doingWellElements: wellElements,
     doingWell: document.getElementById('doingWell').value.trim(),
+    couldGrowElements: growElements,
     couldGrow: document.getElementById('couldGrow').value.trim(),
     scriptureWord: document.getElementById('scriptureWord').value.trim(),
     scriptureWorks: document.getElementById('scriptureWorks').value.trim(),
