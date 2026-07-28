@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LA Metro Member Survey</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,500&family=Inter:wght@400;500;600&display=swap');
+
+  :root{
+    --ink:#F6F1E4;
+    --night:#1F2A3C;
+    --night-deep:#161D2A;
+    --gold:#D9A441;
+    --gold-soft:#E8C374;
+    --sage:#7F9678;
+    --clay:#B8654A;
+    --line: rgba(246,241,228,0.16);
+  }
+
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background: var(--night-deep);
+    color: var(--ink);
+    font-family: 'Inter', sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap{
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 56px 24px 80px;
+  }
+
+  .eyebrow{
+    font-size: 13px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--gold-soft);
+    margin-bottom: 14px;
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  .eyebrow::before{
+    content:'';
+    width: 20px;
+    height: 1px;
+    background: var(--gold-soft);
+    display:inline-block;
+  }
+
+  h1{
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: clamp(2.1rem, 5vw, 3.1rem);
+    line-height: 1.05;
+    margin: 0 0 18px;
+  }
+  h1 em{ font-style: italic; font-weight: 500; color: var(--gold); }
+
+  .lede{
+    font-size: 16px;
+    line-height: 1.65;
+    color: rgba(246,241,228,0.78);
+    max-width: 52ch;
+    margin: 0 0 8px;
+  }
+
+  form{ margin-top: 8px; }
+
+  .section-label{
+    font-family:'Fraunces', serif;
+    font-style: italic;
+    font-size: 20px;
+    color: var(--gold-soft);
+    margin: 44px 0 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--line);
+  }
+  .section-label:first-of-type{ margin-top: 0; }
+
+  .field{ margin-bottom: 22px; }
+  label{
+    display:block;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    margin-bottom: 8px;
+    color: var(--ink);
+  }
+  .hint{
+    font-size: 12px;
+    color: rgba(246,241,228,0.5);
+    margin-top: 6px;
+  }
+
+  input[type=text], input[type=email], input[type=tel], textarea{
+    width: 100%;
+    background: rgba(246,241,228,0.05);
+    border: 1px solid var(--line);
+    color: var(--ink);
+    padding: 13px 14px;
+    border-radius: 6px;
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    transition: border-color 0.15s ease, background 0.15s ease;
+  }
+  input::placeholder, textarea::placeholder{ color: rgba(246,241,228,0.35); }
+  input:focus, textarea:focus{
+    outline: none;
+    border-color: var(--gold);
+    background: rgba(246,241,228,0.08);
+  }
+  textarea{ resize: vertical; min-height: 90px; font-family:'Inter',sans-serif; }
+
+  .row2{
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+  }
+  @media (max-width: 540px){ .row2{ grid-template-columns: 1fr; } }
+
+  .thirds{ margin: 44px 0 40px; }
+  .thirds-title{
+    font-family:'Fraunces', serif;
+    font-style: italic;
+    font-size: 19px;
+    color: var(--gold-soft);
+    margin-bottom: 20px;
+  }
+  .thirds-grid{
+    display:grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  @media (max-width: 640px){ .thirds-grid{ grid-template-columns: 1fr; } }
+  .third{
+    background: rgba(246,241,228,0.03);
+    padding: 24px 20px;
+  }
+  .third-num{
+    display:block;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--sage);
+    margin-bottom: 10px;
+  }
+  .third h3{
+    font-family:'Fraunces', serif;
+    font-weight: 600;
+    font-size: 19px;
+    margin: 0 0 10px;
+    color: var(--gold-soft);
+  }
+  .third p{
+    font-size: 13.5px;
+    line-height: 1.55;
+    color: rgba(246,241,228,0.72);
+    margin: 0;
+  }
+
+  .submit-row{
+    margin-top: 44px;
+    display:flex;
+    align-items:center;
+    gap: 18px;
+  }
+  button[type=submit]{
+    background: var(--gold);
+    color: var(--night-deep);
+    border: none;
+    padding: 15px 32px;
+    font-size: 15px;
+    font-weight: 600;
+    border-radius: 6px;
+    cursor:pointer;
+    font-family:'Inter', sans-serif;
+    transition: transform 0.12s ease, background 0.12s ease;
+  }
+  button[type=submit]:hover{ background: var(--gold-soft); transform: translateY(-1px); }
+  button[type=submit]:disabled{ opacity:0.5; cursor:default; transform:none; }
+  button[type=submit]:focus-visible{ outline: 2px solid var(--ink); outline-offset:3px; }
+
+  .status{ font-size: 13.5px; color: rgba(246,241,228,0.6); }
+  .status.ok{ color: var(--sage); }
+  .status.err{ color: var(--clay); }
+
+  .confirm-card{
+    display:none;
+    margin-top: 40px;
+    padding: 28px;
+    border: 1px solid var(--gold);
+    border-radius: 8px;
+    background: rgba(217,164,65,0.07);
+  }
+  .confirm-card h2{
+    font-family:'Fraunces', serif;
+    font-style: italic;
+    font-weight: 500;
+    font-size: 22px;
+    margin: 0 0 10px;
+    color: var(--gold-soft);
+  }
+  .confirm-card p{ margin:0; line-height:1.6; color: rgba(246,241,228,0.8); font-size:14.5px; }
+
+  .admin-toggle{
+    position: fixed;
+    bottom: 18px;
+    right: 18px;
+    font-size: 11px;
+    color: rgba(246,241,228,0.35);
+    cursor:pointer;
+    background:none;
+    border:none;
+    font-family:'Inter', sans-serif;
+  }
+  .admin-panel{
+    display:none;
+    max-width: 720px;
+    margin: 40px auto 0;
+    padding: 0 24px;
+  }
+  .admin-panel h3{ font-family:'Fraunces', serif; font-style:italic; color: var(--gold-soft); }
+  .app-card{
+    border:1px solid var(--line);
+    border-radius:6px;
+    padding:14px 16px;
+    margin-bottom:10px;
+    font-size:13.5px;
+    line-height:1.6;
+  }
+  .app-card b{ color: var(--gold-soft); }
+
+  nav{
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding: 18px 24px;
+    background: rgba(22,29,42,0.92);
+    backdrop-filter: blur(6px);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav-logo{
+    font-family:'Fraunces', serif;
+    font-style: italic;
+    font-weight: 600;
+    font-size: 17px;
+    color: var(--gold-soft);
+    text-decoration:none;
+  }
+  .nav-links{ display:flex; gap: 22px; list-style:none; margin:0; padding:0; }
+  .nav-links a{
+    color: rgba(246,241,228,0.7);
+    text-decoration:none;
+    font-size: 13.5px;
+    font-weight: 500;
+    transition: color 0.15s ease;
+  }
+  .nav-links a:hover{ color: var(--gold); }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="index.html">LA Metro Midlevel</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Member Survey</a></li>
+    <li><a href="demographics-breakdown.html">LA Metro Demographics</a></li>
+  </ul>
+</nav>
+
+<div class="wrap">
+
+  <div class="eyebrow">NPL Midlevel Survey · Church Member Check-In</div>
+  <h1>How's your <em>time in the church</em> been?</h1>
+  <p class="lede">A short check-in for church members — not leaders. This helps us hear directly from the congregation about wins, challenges, and where the church circle could grow.</p>
+
+  <form id="appForm">
+
+    <div class="section-label">Who's answering</div>
+
+    <div class="row2">
+      <div class="field">
+        <label for="fullName">Full name</label>
+        <input type="text" id="fullName" placeholder="Jordan Reyes" required>
+      </div>
+      <div class="field">
+        <label for="email">Email</label>
+        <input type="email" id="email" placeholder="jordan@example.com" required>
+      </div>
+    </div>
+
+    <div class="row2">
+      <div class="field">
+        <label for="phone">Phone</label>
+        <input type="tel" id="phone" placeholder="(323) 555-0148">
+      </div>
+      <div class="field">
+        <label for="church">Church / circle name</label>
+        <input type="text" id="church" placeholder="Name of your church or circle" required>
+      </div>
+    </div>
+
+    <div class="section-label">Wins &amp; challenges</div>
+
+    <div class="field">
+      <label for="wins">Wins during your time at the church</label>
+      <textarea id="wins" placeholder="What's gone well during your time here?"></textarea>
+      <p class="hint">If you've been part of the church longer than two years, just reflect on the last two years.</p>
+    </div>
+
+    <div class="field">
+      <label for="challenges">Challenges you're facing in the church</label>
+      <textarea id="challenges" placeholder="What's been hard, or where do you feel stuck?"></textarea>
+    </div>
+
+    <div class="section-label">The church circle</div>
+
+    <div class="field">
+      <label for="doingWell">What's being done well</label>
+      <textarea id="doingWell" placeholder="What do you see the church circle doing well right now?"></textarea>
+    </div>
+
+    <div class="field">
+      <label for="couldGrow">What's not being done well, and where it could grow</label>
+      <textarea id="couldGrow" placeholder="Where do you see room to grow or improve?"></textarea>
+    </div>
+
+    <div class="thirds">
+      <div class="thirds-title">Your own Word, Works, Wineskins</div>
+      <p class="lede" style="margin-bottom:24px;">Take a shot at it yourself — is there a scriptural solution you see for the challenge you named above?</p>
+      <div class="thirds-grid">
+        <div class="third">
+          <span class="third-num">Step One</span>
+          <h3>Word</h3>
+          <p>What does scripture say to the challenge you named?</p>
+        </div>
+        <div class="third">
+          <span class="third-num">Step Two</span>
+          <h3>Works</h3>
+          <p>Where have you seen this worked out elsewhere?</p>
+        </div>
+        <div class="third">
+          <span class="third-num">Step Three</span>
+          <h3>Wineskins</h3>
+          <p>What's a concrete change your church could try?</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="field">
+      <label for="scriptureWord">Word</label>
+      <textarea id="scriptureWord" placeholder="What does scripture say to the challenge you named?"></textarea>
+    </div>
+
+    <div class="field">
+      <label for="scriptureWorks">Works</label>
+      <textarea id="scriptureWorks" placeholder="Where have you seen this worked out elsewhere?"></textarea>
+    </div>
+
+    <div class="field">
+      <label for="scriptureWineskins">Wineskins</label>
+      <textarea id="scriptureWineskins" placeholder="What's a concrete change your church could try?"></textarea>
+    </div>
+
+    <div class="submit-row">
+      <button type="submit" id="submitBtn">Submit survey</button>
+      <span class="status" id="statusMsg"></span>
+    </div>
+  </form>
+
+  <div class="confirm-card" id="confirmCard">
+    <h2>Received.</h2>
+    <p>Thank you — your response is in. We review these on a rolling basis.</p>
+  </div>
+
+</div>
+
+<button class="admin-toggle" id="adminToggle">view responses</button>
+<div class="admin-panel" id="adminPanel">
+  <h3>Responses received</h3>
+  <div id="adminList"></div>
+</div>
+
+<script>
+const form = document.getElementById('appForm');
+const statusMsg = document.getElementById('statusMsg');
+const submitBtn = document.getElementById('submitBtn');
+const confirmCard = document.getElementById('confirmCard');
+
+form.addEventListener('submit', async (e)=>{
+  e.preventDefault();
+  statusMsg.textContent = '';
+  statusMsg.className = 'status';
+
+  const entry = {
+    name: document.getElementById('fullName').value.trim(),
+    email: document.getElementById('email').value.trim(),
+    phone: document.getElementById('phone').value.trim(),
+    church: document.getElementById('church').value.trim(),
+    wins: document.getElementById('wins').value.trim(),
+    challenges: document.getElementById('challenges').value.trim(),
+    doingWell: document.getElementById('doingWell').value.trim(),
+    couldGrow: document.getElementById('couldGrow').value.trim(),
+    scriptureWord: document.getElementById('scriptureWord').value.trim(),
+    scriptureWorks: document.getElementById('scriptureWorks').value.trim(),
+    scriptureWineskins: document.getElementById('scriptureWineskins').value.trim(),
+    submittedAt: new Date().toISOString()
+  };
+
+  submitBtn.disabled = true;
+  statusMsg.textContent = 'Submitting…';
+
+  try{
+    const key = 'member-survey:' + Date.now() + ':' + Math.random().toString(36).slice(2,7);
+    const result = await window.storage.set(key, JSON.stringify(entry), true);
+    if(!result){ throw new Error('Storage returned no result'); }
+    form.style.display = 'none';
+    confirmCard.style.display = 'block';
+    statusMsg.textContent = '';
+  }catch(err){
+    console.error('Storage error:', err);
+    statusMsg.textContent = 'Something went wrong saving your response. Please try again.';
+    statusMsg.className = 'status err';
+    submitBtn.disabled = false;
+  }
+});
+
+const adminToggle = document.getElementById('adminToggle');
+const adminPanel = document.getElementById('adminPanel');
+const adminList = document.getElementById('adminList');
+
+adminToggle.addEventListener('click', async ()=>{
+  const isOpen = adminPanel.style.display === 'block';
+  if(isOpen){
+    adminPanel.style.display = 'none';
+    adminToggle.textContent = 'view responses';
+    return;
+  }
+  adminToggle.textContent = 'loading…';
+  try{
+    const list = await window.storage.list('member-survey:', true);
+    adminList.innerHTML = '';
+    if(!list || !list.keys || list.keys.length === 0){
+      adminList.innerHTML = '<p style="color:rgba(246,241,228,0.5); font-size:13.5px;">No responses yet.</p>';
+    } else {
+      for(const key of list.keys){
+        try{
+          const res = await window.storage.get(key, true);
+          if(res && res.value){
+            const d = JSON.parse(res.value);
+            const card = document.createElement('div');
+            card.className = 'app-card';
+            card.innerHTML = `<b>${d.name}</b><br>${d.church}<br>${d.email}${d.phone ? ' · '+d.phone : ''}`
+              + `${d.wins ? '<br>Wins: '+d.wins : ''}${d.challenges ? '<br>Challenges: '+d.challenges : ''}`
+              + `${d.doingWell ? '<br>Doing well: '+d.doingWell : ''}${d.couldGrow ? '<br>Could grow: '+d.couldGrow : ''}`
+              + `${d.scriptureWord ? '<br>Word: '+d.scriptureWord : ''}${d.scriptureWorks ? '<br>Works: '+d.scriptureWorks : ''}${d.scriptureWineskins ? '<br>Wineskins: '+d.scriptureWineskins : ''}`;
+            adminList.appendChild(card);
+          }
+        }catch(e){ console.error('Failed to load entry', key, e); }
+      }
+    }
+    adminPanel.style.display = 'block';
+    adminToggle.textContent = 'hide responses';
+  }catch(err){
+    console.error('List error:', err);
+    adminToggle.textContent = 'view responses';
+  }
+});
+</script>
+
+</body>
+</html>
