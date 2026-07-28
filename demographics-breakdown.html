@@ -76,6 +76,19 @@
     margin-bottom: 20px;
   }
 
+  .map-section{
+    display:flex;
+    align-items:flex-start;
+    gap: 40px;
+    margin-bottom: 40px;
+  }
+  .map-col{ flex: 1 1 520px; min-width:0; }
+  .map-purpose{ flex: 1 1 280px; padding-top: 4px; }
+  @media (max-width: 780px){
+    .map-section{ flex-direction:column; }
+    .map-purpose{ order:-1; }
+  }
+
   .counties{
     display:grid;
     grid-template-columns: 1fr 1fr;
@@ -282,8 +295,15 @@
   <p class="lede">Our target is Los Angeles Metro as a whole — this map is simply here to help. It's a quick visual of the ethnic and racial makeup across LA and Orange County, so as we approach the city we can see which people groups are worth intentionally engaging, with the goal of no place left in revival across LA Metro.</p>
 
   <div class="map-section">
-    <div id="realMap" style="width:100%; max-width:520px; margin:0 auto;"></div>
-    <p style="text-align:center; font-size:12px; color:rgba(246,241,228,0.4); margin:12px 0 40px;">County shapes from US Census Bureau TIGER boundary data. Regions are drawn around 17 known reference points and clipped to the actual county outlines — not literal zip code lines, but a close visual stand-in given real per-zip data isn't reliably available.</p>
+    <div class="map-col">
+      <div id="realMap" style="width:100%; max-width:520px; margin:0 auto;"></div>
+      <p style="text-align:center; font-size:12px; color:rgba(246,241,228,0.4); margin:12px 0 0;">County shapes from US Census Bureau TIGER boundary data. Regions are drawn around 17 known reference points and clipped to the actual county outlines — not literal zip code lines, but a close visual stand-in given real per-zip data isn't reliably available.</p>
+    </div>
+    <div class="map-purpose">
+      <div class="section-title" style="margin-bottom:14px;">Why this map</div>
+      <p class="lede" style="margin-bottom:14px;">This is a working reference, not just a picture — it's here to make the demographics of Southern California visible at a glance, so teams can see who actually lives in the areas they're already serving.</p>
+      <p class="lede" style="margin:0;">Use it to see, region by region, who's still unreached in LA Metro — the goal is no place left and revival across Los Angeles — and to shape how you plan outreach, language, and partnerships going into the gathering.</p>
+    </div>
   </div>
 
   <div class="section-title">County summary</div>
