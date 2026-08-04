@@ -318,14 +318,23 @@
 
     <div class="section-label">Who's answering</div>
 
-    <div class="row2">
-      <div class="field">
-        <label for="fullName">Full name</label>
-        <input type="text" id="fullName" placeholder="Jordan Reyes" required>
+    <div class="field">
+      <div class="check-item">
+        <input type="checkbox" id="anonymous">
+        <label for="anonymous">I'd like to answer anonymously (skip name &amp; email)</label>
       </div>
-      <div class="field">
-        <label for="email">Email</label>
-        <input type="email" id="email" placeholder="jordan@example.com" required>
+    </div>
+
+    <div id="identityFields">
+      <div class="row2">
+        <div class="field">
+          <label for="fullName">Full name</label>
+          <input type="text" id="fullName" placeholder="Jordan Reyes" required>
+        </div>
+        <div class="field">
+          <label for="email">Email</label>
+          <input type="email" id="email" placeholder="jordan@example.com" required>
+        </div>
       </div>
     </div>
 
@@ -465,10 +474,16 @@ const form = document.getElementById('appForm');
 const statusMsg = document.getElementById('statusMsg');
 const submitBtn = document.getElementById('submitBtn');
 const confirmCard = document.getElementById('confirmCard');
+const anonymousCheckbox = document.getElementById('anonymous');
+const identityFields = document.getElementById('identityFields');
 
 function isValidEmail(v){
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
 }
+
+anonymousCheckbox.addEventListener('change', ()=>{
+  identityFields.style.display = anonymousCheckbox.checked ? 'none' : '';
+});
 
 form.addEventListener('submit', async (e)=>{
   e.preventDefault();
@@ -480,9 +495,12 @@ form.addEventListener('submit', async (e)=>{
   const growElements = [];
   document.querySelectorAll('input[id^="grow-"]:checked').forEach(cb => growElements.push(cb.value));
 
+  const anonymous = anonymousCheckbox.checked;
+
   const entry = {
-    name: document.getElementById('fullName').value.trim(),
-    email: document.getElementById('email').value.trim(),
+    anonymous,
+    name: anonymous ? '' : document.getElementById('fullName').value.trim(),
+    email: anonymous ? '' : document.getElementById('email').value.trim(),
     phone: document.getElementById('phone').value.trim(),
     church: document.getElementById('church').value.trim(),
     location: document.getElementById('location').value.trim(),
@@ -498,7 +516,7 @@ form.addEventListener('submit', async (e)=>{
   };
 
   // Fast client-side check for UX only -- the relay re-validates everything server-side.
-  if(!entry.name || !entry.email || !entry.church || !isValidEmail(entry.email)){
+  if(!entry.church || (!anonymous && (!entry.name || !entry.email || !isValidEmail(entry.email)))){
     statusMsg.textContent = 'Please fill in all required fields with a valid email.';
     statusMsg.className = 'status err';
     return;
