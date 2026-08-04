@@ -321,7 +321,7 @@
     <div class="field">
       <div class="check-item">
         <input type="checkbox" id="anonymous">
-        <label for="anonymous">I'd like to answer anonymously (skip name &amp; email)</label>
+        <label for="anonymous">I'd like to answer anonymously (skip name, email &amp; phone)</label>
       </div>
     </div>
 
@@ -336,17 +336,15 @@
           <input type="email" id="email" placeholder="jordan@example.com" required>
         </div>
       </div>
-    </div>
-
-    <div class="row2">
       <div class="field">
         <label for="phone">Phone</label>
         <input type="tel" id="phone" placeholder="(323) 555-0148">
       </div>
-      <div class="field">
-        <label for="church">Church / gathering name</label>
-        <input type="text" id="church" placeholder="Name of your church or gathering" required>
-      </div>
+    </div>
+
+    <div class="field">
+      <label for="church">Church / gathering name</label>
+      <input type="text" id="church" placeholder="Name of your church or gathering" required>
     </div>
 
     <div class="field">
@@ -501,7 +499,7 @@ form.addEventListener('submit', async (e)=>{
     anonymous,
     name: anonymous ? '' : document.getElementById('fullName').value.trim(),
     email: anonymous ? '' : document.getElementById('email').value.trim(),
-    phone: document.getElementById('phone').value.trim(),
+    phone: anonymous ? '' : document.getElementById('phone').value.trim(),
     church: document.getElementById('church').value.trim(),
     location: document.getElementById('location').value.trim(),
     wins: document.getElementById('wins').value.trim(),
